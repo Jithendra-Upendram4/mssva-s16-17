@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  processor:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    container_name: artifact_processor
+    volumes:
+      - ..:/workspace:cached
+    working_dir: /workspace
+    environment:
+      - PROCESSOR_MODE=normal
+      - ENABLE_REMOTE_SCHEMA=true
+    ports:
+      - "8080:8080"
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
